@@ -6,8 +6,6 @@ const { ccclass, property } = _decorator;
 @ccclass('GameManager')
 export class GameManager extends Component {
     
-    
-    Ssdasd:number=5;
 
     @property({type:EditBox})
     loginBox;
@@ -27,10 +25,11 @@ export class GameManager extends Component {
         this.passwordBox.string="Testing123";
     }
 
+    
     update(deltaTime: number) {
         
     }
-
+    
     LoginCall()
     { 
         console.log(this.loginBox.string);
@@ -50,7 +49,10 @@ export class GameManager extends Component {
             {
                 console.log(JSON.parse(request.response));
                 
-               console.log(JSON.stringify(JSON.parse(request.response)));
+               const obj=JSON.parse(request.response);
+               console.log(obj.AffLoginResult.AffID);
+               console.log(obj.AffLoginResult.Error.IsSuccess);
+               console.log(obj.AffLoginResult.Error.Message);
             }
             this.loadingPanel.active=false;
         }
