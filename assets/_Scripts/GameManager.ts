@@ -1,80 +1,38 @@
 import { _decorator, Component, Node, TiledMap, EditBox } from 'cc';
-import { Test1 } from './Test1';
-// import * as request from 'request';
+import { DatabaseHandler } from './DatabaseHandler';
+import { References } from './References';
 const { ccclass, property } = _decorator;
 
 @ccclass('GameManager')
 export class GameManager extends Component {
-    
 
-    @property({type:EditBox})
-    loginBox;
+    static instance:GameManager=null;
 
-    @property({type:EditBox})
-    passwordBox;
+    @property
+    automaticLogin:boolean=true;
 
-    @property({type:Node})
-    loginPanel;
-
-    @property({type:Node})
-    loadingPanel;
+    @property
+    updateWeeklyToo:boolean=true;
 
     start() 
     {
-        this.loginBox.string="TestAdmin";
-        this.passwordBox.string="Testing123";
-    }
-
-    
-    update(deltaTime: number) {
-        
-    }
-    
-    LoginCall()
-    { 
-        console.log(this.loginBox.string);
-        console.log(this.passwordBox.string);
-        let request = new XMLHttpRequest();
-        // request.open("GET", "http://playtrophygames.com/PTGService.svc/AffLogin?Username=TestAdmin&Password=Testing123");
-        request.open("GET", "http://playtrophygames.com/PTGService.svc/AffLogin?Username="+this.loginBox.string+"&Password="
-        +this.passwordBox.string);
-        request.send();
-        this.loadingPanel.active=true;
-        this.loginPanel.active=false;
-        request.onload=()=>{
-            console.log("2");
-            console.log(request);
-            console.log(request.status);
-            if(request.status==200)
-            {
-                console.log(JSON.parse(request.response));
-                
-               const obj=JSON.parse(request.response);
-               console.log(obj.AffLoginResult.AffID);
-               console.log(obj.AffLoginResult.Error.IsSuccess);
-               console.log(obj.AffLoginResult.Error.Message);
-            }
-            this.loadingPanel.active=false;
+        GameManager.instance=this;
+        if(this.automaticLogin)
+        {
+            this.scheduleOnce(function(){
+                this.DelayedInitialize();
+            },0.1);
         }
     }
+
+    DelayedInitialize(){
+        References.instance.loginBox.string="TestAdmin";
+        References.instance.passwordBox.string="Testing123";
+        if(this.automaticLogin)DatabaseHandler.instance.LoginCall();
+    }
+    
+    ShowDataInUi()
+    {
+
+    }
 }
-
-class Error
-{
-    IsSuccess:boolean;
-    Message:String;
-}
-
-class AffLoginResult
-{
-    @property
-    AffID:number;
-    @property({type:Error}) 
-    Error;
-}
-
-
-    // public class Root
-    // {
-    //     public AffLoginResult AffLoginResult { get; set; }
-    // }
