@@ -12,16 +12,13 @@ export class DatabaseHandler extends Component {
     AffID:number=0;
 
     @property
-    currentData:any=null;
-
-    @property
-    leadersData:any=null;
-
-    @property
     loginLink:string="http://playtrophygames.com/PTGService.svc/AffLogin?Username=";
 
     @property
     summaryLink:string="http://playtrophygames.com/PTGService.svc/GetTournamentSummary?AffID=";
+
+    @property
+    leadersLink:string="http://playtrophygames.com/PTGService.svc/GetLocationSummary?AffID=";
 
     start() {
         DatabaseHandler.instance=this;
@@ -49,9 +46,12 @@ export class DatabaseHandler extends Component {
                this.SummaryFetch();
             }
             else
-            References.instance.loginPanel.active=true;
+            {
+                References.instance.loginPanel.active=true;
+                References.instance.loadingPanel.active=false;
             }
-            References.instance.loadingPanel.active=false;
+        }
+            
         }
     }
 
@@ -71,14 +71,15 @@ export class DatabaseHandler extends Component {
                 console.log(request.response);
                 if(obj.GetTournamentSummaryResult.Error.IsSuccess)
                 {
-                    this.currentData=obj.GetTournamentSummaryResult.SummaryList;
-                    if(GameManager.instance.updateWeeklyToo)
+                    GameManager.instance.currentData=obj.GetTournamentSummaryResult.SummaryList;
+                    if(GameManager.instance.updateLeadersToo)
                     {
-
+                        this.LeadersFetch();
                     }
                     else
                     {
                         GameManager.instance.ShowDataInUi();
+                        References.instance.loadingPanel.active=false;
                     }
                 }
                 else
@@ -86,7 +87,6 @@ export class DatabaseHandler extends Component {
 
                 }
             }
-            References.instance.loadingPanel.active=false;
         }
     }
 
@@ -94,8 +94,7 @@ export class DatabaseHandler extends Component {
     {
         let request = new XMLHttpRequest();
         // request.open("GET", "http://playtrophygames.com/PTGService.svc/AffLogin?Username=TestAdmin&Password=Testing123");
-        request.open("GET", this.loginLink+References.instance.loginBox.string+"&Password="
-        +References.instance.passwordBox.string);
+        request.open("GET", this.leadersLink+this.AffID);
         request.send();
         References.instance.loadingPanel.active=true;
         References.instance.loginPanel.active=false;
@@ -106,10 +105,10 @@ export class DatabaseHandler extends Component {
                const obj=JSON.parse(request.response);
                console.log(request.response);
             
-            if(obj.AffLoginResult.Error.IsSuccess)
+            if(obj.GetLocationSummaryResult.Error.IsSuccess)
             {
-               this.AffID=obj.AffLoginResult.AffID;
-               this.SummaryFetch();
+                GameManager.instance.leadersData=obj.GetLocationSummaryResult.Winners;
+                GameManager.instance.ShowDataInUi();
             }
             else
             References.instance.loginPanel.active=true;

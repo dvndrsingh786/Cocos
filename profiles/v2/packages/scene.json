@@ -84,5 +84,12 @@
   },
   "camera-uuids": [
     "f46876e4-e81b-4931-b493-6d367be385e7"
-  ]
+  ],
+  "game-view": {
+    "scaleValue": 149,
+    "sliderValue": 58,
+    "fullScreen": true,
+    "stats": false,
+    "rotate": false
+  }
 }
