@@ -34,7 +34,7 @@ export class GameManager extends Component {
     DelayedInitialize(){
         References.instance.loginBox.string="TestAdmin";
         References.instance.passwordBox.string="Testing123";
-        if(this.automaticLogin)DatabaseHandler.instance.LoginCall();
+        DatabaseHandler.instance.LoginCall();
     }
     
     ShowDataInUi()
@@ -43,7 +43,7 @@ export class GameManager extends Component {
         for(let i=0;i<6;i++)
         {
             References.instance.currentStandingsObjs[i].SetMyData(this.currentData[i].TournID,
-                null,this.currentData[i].User1,this.currentData[i].User2,this.currentData[i].User3,
+                this.GetCorresSpriteFrame(this.currentData[i].ClientID),this.currentData[i].User1,this.currentData[i].User2,this.currentData[i].User3,
                 this.currentData[i].Score1,this.currentData[i].Score2,this.currentData[i].Score3);
         }
         //#endregion
@@ -61,9 +61,9 @@ export class GameManager extends Component {
                     }
                 }
             }
-            if(k==1)References.instance.weeklyFirst.string=this.leadersData[i].Username;
-            else if(k==2)References.instance.weeklySecond.string=this.leadersData[i].Username;
-            else References.instance.weeklyThird.string=this.leadersData[i].Username;
+            if(k==1)References.instance.weeklyFirst.string=this.GetStringWithColor(this.leadersData[i].Username,"000000");
+            else if(k==2)References.instance.weeklySecond.string=this.GetStringWithColor(this.leadersData[i].Username,"000000");
+            else References.instance.weeklyThird.string=this.GetStringWithColor(this.leadersData[i].Username,"000000");
         }
         //#endregion
         //#region Set Daily Data
@@ -81,13 +81,32 @@ export class GameManager extends Component {
                     }
                 }
             }
-            if(k==1)References.instance.dailyFirst.string=this.leadersData[i].Username;
-            else if(k==2)References.instance.dailySecond.string=this.leadersData[i].Username;
-            else References.instance.dailyThird.string=this.leadersData[i].Username;
+            if(k==1)References.instance.dailyFirst.string=this.GetStringWithColor(this.leadersData[i].Username,"000000");
+            else if(k==2)References.instance.dailySecond.string=this.GetStringWithColor(this.leadersData[i].Username,"000000");
+            else References.instance.dailyThird.string=this.GetStringWithColor(this.leadersData[i].Username,"000000");
         }
 
         //#endregion
 
         References.instance.resultScreen.active=true;
+    }
+
+    GetCorresSpriteFrame(_clientID:number)
+    {
+        for(let i=0;i<References.instance.spriteCodes.length;i++)
+        {
+            if(_clientID==References.instance.spriteCodes[i])
+            {
+                return References.instance.sprites[i];
+            }
+        }
+        return null;
+    }
+
+    GetStringWithColor(message:string,colorCode:string)
+    {
+        let finalString;
+        finalString="<color=#"+colorCode+">"+message+"</color>";
+        return finalString;
     }
 }

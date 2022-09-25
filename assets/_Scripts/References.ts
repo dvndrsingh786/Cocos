@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, EditBox, RichText, SpriteFrame } from 'cc';
 import { CurrentStandingsScript } from './CurrentStandingsScript';
+import { PopupScript } from './PopupScript';
 const { ccclass, property } = _decorator;
 
 @ccclass('References')
@@ -23,6 +24,9 @@ export class References extends Component {
 
     @property({type:Node})
     loadingPanel;
+
+    @property({type:PopupScript})
+    popUp;
 
     @property({type:Node})
     resultScreen;

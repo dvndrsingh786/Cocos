@@ -49,7 +49,14 @@ export class DatabaseHandler extends Component {
             {
                 References.instance.loginPanel.active=true;
                 References.instance.loadingPanel.active=false;
+                References.instance.popUp.EnablePopUp(obj.AffLoginResult.Error.Message);
             }
+        }
+        else
+        {
+            References.instance.loginPanel.active=true;
+            References.instance.loadingPanel.active=false;
+            References.instance.popUp.EnablePopUp("Something went wrong!");
         }
             
         }
@@ -84,8 +91,16 @@ export class DatabaseHandler extends Component {
                 }
                 else
                 {
-
+                    References.instance.loginPanel.active=true;
+                    References.instance.loadingPanel.active=false;
+                    References.instance.popUp.EnablePopUp(obj.GetTournamentSummaryResult.Error.Message);
                 }
+            }
+            else
+            {
+                References.instance.loginPanel.active=true;
+                References.instance.loadingPanel.active=false;
+                References.instance.popUp.EnablePopUp("Something went wrong");
             }
         }
     }
@@ -111,7 +126,17 @@ export class DatabaseHandler extends Component {
                 GameManager.instance.ShowDataInUi();
             }
             else
-            References.instance.loginPanel.active=true;
+            {
+                References.instance.loginPanel.active=true;
+                References.instance.loadingPanel.active=false;
+                References.instance.popUp.EnablePopUp(obj.GetLocationSummaryResult.Error.Message);
+            }
+            }
+            else
+            {
+                References.instance.loginPanel.active=true;
+                References.instance.loadingPanel.active=false;
+                References.instance.popUp.EnablePopUp("Something went wrong!");
             }
             References.instance.loadingPanel.active=false;
         }

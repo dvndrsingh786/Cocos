@@ -1,0 +1,14 @@
+{
+  "common": {
+    "polyfills": {
+      "asyncFunctions": true
+    },
+    "name": "TheProject",
+    "buildPath": "/Users/bakshish_ptg/Desktop/Projects/DAV/Builds/Cocos_Build",
+    "buildStageGroup": {
+      "build": [
+        "run"
+      ]
+    }
+  }
+}
