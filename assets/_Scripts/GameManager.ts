@@ -61,9 +61,9 @@ export class GameManager extends Component {
                     }
                 }
             }
-            if(k==1)References.instance.weeklyFirst.string=this.GetStringWithColor(this.leadersData[i].Username,"000000");
-            else if(k==2)References.instance.weeklySecond.string=this.GetStringWithColor(this.leadersData[i].Username,"000000");
-            else References.instance.weeklyThird.string=this.GetStringWithColor(this.leadersData[i].Username,"000000");
+            if(k==1)References.instance.weeklyFirst.string=this.GetStringWithColor(this.leadersData[i].Username,"ffff00");
+            else if(k==2)References.instance.weeklySecond.string=this.GetStringWithColor(this.leadersData[i].Username,"0000ff");
+            else References.instance.weeklyThird.string=this.GetStringWithColor(this.leadersData[i].Username,"ff0000");
         }
         //#endregion
         //#region Set Daily Data
@@ -81,9 +81,9 @@ export class GameManager extends Component {
                     }
                 }
             }
-            if(k==1)References.instance.dailyFirst.string=this.GetStringWithColor(this.leadersData[i].Username,"000000");
-            else if(k==2)References.instance.dailySecond.string=this.GetStringWithColor(this.leadersData[i].Username,"000000");
-            else References.instance.dailyThird.string=this.GetStringWithColor(this.leadersData[i].Username,"000000");
+            if(k==1)References.instance.dailyFirst.string=this.GetStringWithColor(this.leadersData[i].Username,"ffff00");
+            else if(k==2)References.instance.dailySecond.string=this.GetStringWithColor(this.leadersData[i].Username,"0000ff");
+            else References.instance.dailyThird.string=this.GetStringWithColor(this.leadersData[i].Username,"ff0000");
         }
 
         //#endregion

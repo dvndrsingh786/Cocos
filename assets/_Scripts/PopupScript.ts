@@ -10,7 +10,7 @@ export class PopupScript extends Component {
 
     EnablePopUp(_message:string)
     {
-        this.popUpText.string=GameManager.instance.GetStringWithColor(_message,"000000");
+        this.popUpText.string=GameManager.instance.GetStringWithColor(_message,"ffffff");
         this.node.active=true;
     }
 

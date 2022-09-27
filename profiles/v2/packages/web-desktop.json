@@ -3,12 +3,13 @@
     "polyfills": {
       "asyncFunctions": true
     },
-    "name": "TheProject",
+    "name": "CocosProj",
     "buildPath": "/Users/bakshish_ptg/Desktop/Projects/DAV/Builds/Cocos_Build",
     "buildStageGroup": {
       "build": [
         "run"
       ]
-    }
+    },
+    "outputName": "CocosProj"
   }
 }
