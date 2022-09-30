@@ -188,6 +188,65 @@
         },
         "time": "26-09-2022 10:59",
         "dirty": false
+      },
+      "1664511039427": {
+        "type": "build",
+        "id": "1664511039427",
+        "progress": 1,
+        "state": "success",
+        "stage": "build",
+        "message": "30-09-2022 09:43 Build success in 24171 ms!",
+        "options": {
+          "name": "CocosProj",
+          "platform": "web-desktop",
+          "buildPath": "/Users/bakshish_ptg/Desktop/Projects/DAV/Builds/Cocos_Build",
+          "debug": false,
+          "md5Cache": false,
+          "skipCompressTexture": false,
+          "sourceMaps": false,
+          "polyfills": {
+            "asyncFunctions": true
+          },
+          "experimentalEraseModules": false,
+          "useBuiltinServer": false,
+          "mainBundleIsRemote": false,
+          "mainBundleCompressionType": "merge_dep",
+          "replaceSplashScreen": false,
+          "compressTexture": true,
+          "packAutoAtlas": true,
+          "startScene": "7c3e7fab-7b1e-4865-ba84-3cf81b48b9fb",
+          "outputName": "web-desktop",
+          "scenes": [
+            {
+              "url": "db://assets/scene/main.scene",
+              "uuid": "7c3e7fab-7b1e-4865-ba84-3cf81b48b9fb",
+              "inBundle": false
+            }
+          ],
+          "web-desktop": [],
+          "buildStageGroup": {
+            "build": [
+              "run"
+            ]
+          },
+          "packages": {
+            "web-desktop": {
+              "resolution": {
+                "designWidth": 1280,
+                "designHeight": 960
+              },
+              "__version__": "1.0.1"
+            },
+            "cocos-service": {
+              "configID": "78622b",
+              "services": [],
+              "__version__": "3.0.4"
+            }
+          },
+          "__version__": "1.3.3"
+        },
+        "time": "30-09-2022 09:43",
+        "dirty": false
       }
     }
   }

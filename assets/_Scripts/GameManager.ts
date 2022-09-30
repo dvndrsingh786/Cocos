@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, TiledMap, EditBox } from 'cc';
+import { _decorator, Component, Node, TiledMap, EditBox, RichText } from 'cc';
 import { DatabaseHandler } from './DatabaseHandler';
 import { References } from './References';
 const { ccclass, property } = _decorator;
@@ -15,10 +15,19 @@ export class GameManager extends Component {
     updateLeadersToo:boolean=true;
 
     @property
+    updateDataTime:number=30;
+
+    @property
     currentData:any=null;
 
     @property
     leadersData:any=null;
+
+    @property
+    lowerCaseAtTen:number=5.7;
+
+    @property
+    upperCaseAtTen:number=6.8;
 
     start() 
     {
@@ -61,9 +70,24 @@ export class GameManager extends Component {
                     }
                 }
             }
-            if(k==1)References.instance.weeklyFirst.string=this.GetStringWithColor(this.leadersData[i].Username,"ffff00");
-            else if(k==2)References.instance.weeklySecond.string=this.GetStringWithColor(this.leadersData[i].Username,"0000ff");
-            else References.instance.weeklyThird.string=this.GetStringWithColor(this.leadersData[i].Username,"ff0000");
+            if(k==1)
+            {
+                References.instance.weeklyFirst.string=this.GetStringWithColor(this.leadersData[i].Username,"ffff00");
+                References.instance.weeklyFirst.fontSize=
+                this.GetTextSize(this.leadersData[i].Username,References.instance.weeklyFirst.maxWidth);
+            }
+            else if(k==2)
+            {
+                References.instance.weeklySecond.string=this.GetStringWithColor(this.leadersData[i].Username,"0000ff");
+                References.instance.weeklySecond.fontSize=
+                this.GetTextSize(this.leadersData[i].Username,References.instance.weeklySecond.maxWidth);
+            }
+            else
+            {
+                 References.instance.weeklyThird.string=this.GetStringWithColor(this.leadersData[i].Username,"ff0000");
+                 References.instance.weeklyThird.fontSize=
+                this.GetTextSize(this.leadersData[i].Username,References.instance.weeklyThird.maxWidth);
+            }
         }
         //#endregion
         //#region Set Daily Data
@@ -81,14 +105,40 @@ export class GameManager extends Component {
                     }
                 }
             }
-            if(k==1)References.instance.dailyFirst.string=this.GetStringWithColor(this.leadersData[i].Username,"ffff00");
-            else if(k==2)References.instance.dailySecond.string=this.GetStringWithColor(this.leadersData[i].Username,"0000ff");
-            else References.instance.dailyThird.string=this.GetStringWithColor(this.leadersData[i].Username,"ff0000");
+            if(k==1)
+            {
+                References.instance.dailyFirst.string=this.GetStringWithColor(this.leadersData[i].Username,"ffff00");
+                References.instance.dailyFirst.fontSize=
+                this.GetTextSize(this.leadersData[i].Username,References.instance.dailyFirst.maxWidth);
+            }
+            else if(k==2)
+            {
+                References.instance.dailySecond.string=this.GetStringWithColor(this.leadersData[i].Username,"0000ff");
+                References.instance.dailySecond.fontSize=
+                this.GetTextSize(this.leadersData[i].Username,References.instance.dailySecond.maxWidth);
+            }
+            else
+            {
+                 References.instance.dailyThird.string=this.GetStringWithColor(this.leadersData[i].Username,"ff0000");
+                 References.instance.dailyThird.fontSize=
+                this.GetTextSize(this.leadersData[i].Username,References.instance.dailyThird.maxWidth);
+            }
         }
 
         //#endregion
 
         References.instance.resultScreen.active=true;
+        this.scheduleOnce(function()
+        {
+            this.FetchDataAgain();
+        },this.updateDataTime)
+    }
+
+    FetchDataAgain()
+    {
+        References.instance.loadingPanel.active=true;
+        References.instance.resultScreen.active=false;
+        DatabaseHandler.instance.SummaryFetch();
     }
 
     GetCorresSpriteFrame(_clientID:number)
@@ -108,5 +158,14 @@ export class GameManager extends Component {
         let finalString;
         finalString="<color=#"+colorCode+">"+message+"</color>";
         return finalString;
+    }
+    GetTextSize(textText:string, maxWidth:number):number
+    {
+        var numUpper = textText.length - textText.replace(/[A-Z]/g, '').length;
+        var numLower=textText.length-numUpper;
+        let a=numUpper*this.upperCaseAtTen;
+        let b = numLower*this.lowerCaseAtTen;
+        console.log(numLower);
+        return ((maxWidth/(a+b))*10);
     }
 }

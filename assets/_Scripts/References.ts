@@ -35,22 +35,22 @@ export class References extends Component {
     currentStandingsObjs;
 
     @property({type:RichText})
-    dailyFirst;
+    dailyFirst:RichText;
 
     @property({type:RichText})
-    dailySecond;
+    dailySecond:RichText;
 
     @property({type:RichText})
-    dailyThird;
+    dailyThird:RichText;
 
     @property({type:RichText})
-    weeklyFirst;
+    weeklyFirst:RichText;
 
     @property({type:RichText})
-    weeklySecond;
+    weeklySecond:RichText;
 
     @property({type:RichText})
-    weeklyThird;
+    weeklyThird:RichText;
 
     @property({type:[SpriteFrame]})
     sprites:SpriteFrame[]=[null,null];
