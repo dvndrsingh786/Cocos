@@ -3,6 +3,10 @@
     "web-desktop": {
       "configID": "78622b",
       "services": []
+    },
+    "android": {
+      "configID": "78622b",
+      "services": []
     }
   },
   "builder-options": {
